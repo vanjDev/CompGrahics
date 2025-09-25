@@ -19,8 +19,8 @@ void display(){
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-	glutCreateWindow("Labaratory 3");
 	glutInitWindowSize(1200, 1200);
+	glutCreateWindow("Labaratory 3");
 	glutDisplayFunc(display);
 	glutMainLoop();
 	return 0;
