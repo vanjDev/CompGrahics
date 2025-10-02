@@ -2,7 +2,7 @@
 
 void road() {
     // Road base
-    glColor3f(1.0f, 0.6f, 0.8f); // light pink
+    glColor3f(0.2f, 0.2f, 0.2f); 
     glBegin(GL_QUADS);
         glVertex2f(-1.0f, -0.4f);
         glVertex2f( 1.0f, -0.4f);
@@ -10,23 +10,30 @@ void road() {
         glVertex2f(-1.0f, -0.6f);
     glEnd();
 
-    // Road markings (dashed)
-    glColor3f(1.0f, 0.9f, 0.95f); // pale pink stripes
+    // Road borders
+    glColor3f(1.0f, 0.0f, 0.0f); // red borders
+    glBegin(GL_LINES);
+        glVertex2f(-1.0f, -0.4f);
+        glVertex2f( 1.0f, -0.4f);
+        glVertex2f(-1.0f, -0.6f);
+        glVertex2f( 1.0f, -0.6f);
+    glEnd();
+
+    // Road stripes using lines
+    glColor3f(1.0f, 1.0f, 1.0f);
     float startX = -1.0f;
     while (startX < 1.0f) {
-        glBegin(GL_QUADS);
-            glVertex2f(startX, -0.49f);
-            glVertex2f(startX + 0.1f, -0.49f);
-            glVertex2f(startX + 0.1f, -0.51f);
-            glVertex2f(startX, -0.51f);
+        glBegin(GL_LINES);
+            glVertex2f(startX, -0.5f);
+            glVertex2f(startX + 0.1f, -0.5f);
         glEnd();
-        startX += 0.2f; // space between dashes
+        startX += 0.2f;
     }
 }
 
 void house() {
     // House body
-    glColor3f(1.0f, 0.4f, 0.7f); // darker pink
+    glColor3f(1.0f, 1.0f, 0.0f);
     glBegin(GL_QUADS);
         glVertex2f(-0.3f, -0.4f);
         glVertex2f( 0.3f, -0.4f);
@@ -34,17 +41,43 @@ void house() {
         glVertex2f(-0.3f,  0.1f);
     glEnd();
 
-    // Roof
-    glColor3f(0.9f, 0.2f, 0.5f); // deep pink
+    // Border for house
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(-0.3f, -0.4f);
+        glVertex2f( 0.3f, -0.4f);
+        glVertex2f( 0.3f,  0.1f);
+        glVertex2f(-0.3f,  0.1f);
+    glEnd();
+
+    // Roof (pink)
+    glColor3f(0.9f, 0.2f, 0.5f);
     glBegin(GL_TRIANGLES);
         glVertex2f(-0.4f, 0.1f);
         glVertex2f( 0.4f, 0.1f);
         glVertex2f( 0.0f, 0.4f);
     glEnd();
 
-    // Door
-    glColor3f(1.0f, 0.8f, 0.9f); // pale pink
+    // Roof border
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(-0.4f, 0.1f);
+        glVertex2f( 0.4f, 0.1f);
+        glVertex2f( 0.0f, 0.4f);
+    glEnd();
+
+    // Door (light pink)
+    glColor3f(1.0f, 0.6f, 0.8f);
     glBegin(GL_QUADS);
+        glVertex2f(-0.05f, -0.4f);
+        glVertex2f( 0.05f, -0.4f);
+        glVertex2f( 0.05f, -0.1f);
+        glVertex2f(-0.05f, -0.1f);
+    glEnd();
+
+    // Door border
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_LINE_LOOP);
         glVertex2f(-0.05f, -0.4f);
         glVertex2f( 0.05f, -0.4f);
         glVertex2f( 0.05f, -0.1f);
@@ -54,22 +87,32 @@ void house() {
 
 void tree() {
     // Trunk
-    glColor3f(0.7f, 0.3f, 0.5f); // muted pink
+    glColor3f(0.5f, 0.2f, 0.0f);
     glBegin(GL_QUADS);
         glVertex2f(0.5f, -0.4f);
-        glVertex2f(0.55f, -0.4f);
-        glVertex2f(0.55f, -0.1f);
+        glVertex2f(0.6f, -0.4f);
+        glVertex2f(0.6f, -0.1f);
         glVertex2f(0.5f, -0.1f);
     glEnd();
 
-    // Tree top
-    glColor3f(1.0f, 0.5f, 0.7f); // bright pink
+    // Leaves (pentagon)
+    glColor3f(0.0f, 0.8f, 0.0f);
     glBegin(GL_POLYGON);
-        glVertex2f(0.475f, -0.1f);
-        glVertex2f(0.575f, -0.1f);
-        glVertex2f(0.65f,  0.1f);
-        glVertex2f(0.525f, 0.25f);
-        glVertex2f(0.4f,   0.1f);
+        glVertex2f(0.45f, -0.1f);
+        glVertex2f(0.65f, -0.1f);
+        glVertex2f(0.7f, 0.1f);
+        glVertex2f(0.55f, 0.25f);
+        glVertex2f(0.4f, 0.1f);
+    glEnd();
+
+    // Leaves border
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(0.45f, -0.1f);
+        glVertex2f(0.65f, -0.1f);
+        glVertex2f(0.7f, 0.1f);
+        glVertex2f(0.55f, 0.25f);
+        glVertex2f(0.4f, 0.1f);
     glEnd();
 }
 
@@ -87,8 +130,12 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Pink Theme Scene");
-    glClearColor(1.0, 1.0, 1.0, 1.0); // white background
+    glutCreateWindow("House with Road and Tree");
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // white background
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(-1, 1, -1, 1);
+
     glutDisplayFunc(display);
     glutMainLoop();
     return 0;
