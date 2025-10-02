@@ -1,39 +1,147 @@
-// ===== Ground (only bottom area for grass) =====
-void ground() {
-    glColor3f(0.0f, 0.7f, 0.2f); // Grass green
-    glBegin(GL_QUADS);
-        glVertex2f(-1.0f, -1.0f);
-        glVertex2f( 1.0f, -1.0f);
-        glVertex2f( 1.0f, -0.6f);
-        glVertex2f(-1.0f, -0.6f);
-    glEnd();
+#include <GL/glut.h>
+
+void road() {
+	glColor3f(0.2f, 0.2f, 0.2f); // asphalt
+	glBegin(GL_QUADS);
+	glVertex2f(-1.0f, -0.6f);
+	glVertex2f(1.0f, -0.6f);
+	glVertex2f(1.0f, -0.3f);
+	glVertex2f(-1.0f, -0.3f);
+	glEnd();
+
+	// Road borders
+	glLineWidth(2.5f);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_LINES);
+	glVertex2f(-1.0f, -0.6f); glVertex2f(1.0f, -0.6f); 
+	glVertex2f(-1.0f, -0.3f); glVertex2f(1.0f, -0.3f);
+	glEnd();
+
+	// Center dashed line
+	glEnable(GL_LINE_STIPPLE);
+	glLineStipple(1, 0x00FF);
+	glLineWidth(2.0f);
+	glBegin(GL_LINES);
+	glVertex2f(-1.0f, -0.45f);
+	glVertex2f(1.0f, -0.45f);
+	glEnd();
+	glDisable(GL_LINE_STIPPLE);
 }
 
-// ===== Road (above ground) =====
-void road() {
-    glColor3f(0.2f, 0.2f, 0.2f); // Dark gray asphalt
-    glBegin(GL_QUADS);
-        glVertex2f(-1.0f, -0.6f);
-        glVertex2f( 1.0f, -0.6f);
-        glVertex2f( 1.0f, -0.3f);
-        glVertex2f(-1.0f, -0.3f);
-    glEnd();
+void Sky() {
+	glBegin(GL_QUADS);
+	glColor3f(0.2f, 0.6f, 1.0f);
+	glVertex2f(-1.0f, 1.0f);
+	glVertex2f(1.0f, 1.0f);
 
-    // Road borders (white lines at edges)
-    glLineWidth(2.5f);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glBegin(GL_LINES);
-        glVertex2f(-1.0f, -0.6f); glVertex2f(1.0f, -0.6f); // bottom edge
-        glVertex2f(-1.0f, -0.3f); glVertex2f(1.0f, -0.3f); // top edge
-    glEnd();
+	glColor3f(0.7f, 0.9f, 1.0f);
+	glVertex2f(1.0f, -0.2f);
+	glVertex2f(-1.0f, -0.2f);
+	glEnd();
+}
 
-    // Center dashed line
-    glEnable(GL_LINE_STIPPLE);
-    glLineStipple(1, 0x00FF);
-    glLineWidth(2.0f);
-    glBegin(GL_LINES);
-        glVertex2f(-1.0f, -0.45f);
-        glVertex2f( 1.0f, -0.45f);
-    glEnd();
-    glDisable(GL_LINE_STIPPLE);
+
+void Ground() {
+	glColor3f(0.0f, 0.7f, 0.2f); 
+	glBegin(GL_QUADS);
+	glVertex2f(-1.0f, -1.0f);
+	glVertex2f(1.0f, -1.0f);
+	glVertex2f(1.0f, -0.2f);
+	glVertex2f(-1.0f, -0.2f);
+	glEnd();
+}
+
+void House() {
+	// Walls
+	glColor3f(1.0, 1.0, 0);
+	glBegin(GL_QUADS);
+	glVertex2f(-0.3, -0.3); 
+	glVertex2f(0.3, -0.3);
+	glVertex2f(0.3, 0.3); 
+	glVertex2f(-0.3, 0.3);
+	glEnd();
+
+	// Border
+	glLineWidth(2.0f);
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(-0.3, -0.3);
+	glVertex2f(0.3, -0.3);
+	glVertex2f(0.3, 0.3);
+	glVertex2f(-0.3, 0.3);
+	glEnd();
+
+	// Roof
+	glColor3f(1.0, 0.0, 0.0);
+	glBegin(GL_TRIANGLES);
+	glVertex2f(-0.4, 0.3); glVertex2f(0.4, 0.3);
+	glVertex2f(0.0, 0.55);
+	glEnd();
+
+	// Door
+	glColor3f(0.0, 0.5, 1.0);
+	glBegin(GL_QUADS);
+	glVertex2f(0.05, -0.3);
+	glVertex2f(-0.05, -0.3);
+	glVertex2f(-0.05, 0.0);
+	glVertex2f(0.05, 0.0);
+	glEnd();
+
+	// Border
+	glColor3f(0.4, 0.0, 0.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(0.05, -0.3);
+	glVertex2f(-0.05, -0.3);
+	glVertex2f(-0.05, 0.0);
+	glVertex2f(0.05, 0.0);
+	glEnd();
+}
+
+void Tree() {
+	//Trunk
+	glColor3f(0.5, 0.0, 0.0);
+	glBegin(GL_QUADS);
+	glVertex2f(0.5, -0.3);
+	glVertex2f(0.55, -0.3);
+	glVertex2f(0.55, 0.4);
+	glVertex2f(0.5, 0.4);
+	glEnd();
+
+	// Leaves
+	glColor3f(0.0, 0.6, 0.0);
+	glBegin(GL_POLYGON);
+	glVertex2f(0.45, 0.2);
+	glVertex2f(0.6, 0.2);
+	glVertex2f(0.65, 0.45);
+	glVertex2f(0.525, 0.55);
+	glVertex2f(0.4, 0.45);
+	glEnd();
+}
+
+void display(){
+	glClear(GL_COLOR_BUFFER_BIT);
+	Sky();
+	Ground();
+	road();
+	House();
+	Tree();
+	glFlush();
+}
+
+void init() {
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+}
+
+int main(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(1200, 600);
+	glutCreateWindow("Labaratory 5");
+	init();
+	glutDisplayFunc(display);
+	glutMainLoop();
+	return 0;
 }
